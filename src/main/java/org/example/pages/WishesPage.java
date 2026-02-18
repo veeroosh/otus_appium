@@ -2,48 +2,47 @@ package org.example.pages;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.appium.SelenideAppium.$;
+import static io.appium.java_client.AppiumBy.id;
 
 import com.codeborne.selenide.SelenideElement;
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import io.appium.java_client.AppiumBy;
-import org.example.components.WishItem;
-import org.example.components.WishesContent;
+import org.example.components.content.WishesContent;
+import org.example.components.items.WishItem;
 
 @Singleton
 public class WishesPage extends AbsBasePage {
 
-  @Inject
-  private WishesContent wishesContent;
-  private final SelenideElement addWishItemButton = $(AppiumBy.id("ru.otus.wishlist:id/add_button"));
+  private final WishesContent wishesContent = new WishesContent();
+  private final SelenideElement addWishItemButton = $(id("ru.otus.wishlist:id/add_button"));
 
   public WishesPage assertNumberOfWishes(int value) {
-    if (value == 0)
+    if (value == 0) {
       wishesContent.shouldNotExist();
-    else
+    } else {
       wishesContent
           .shouldBe(visible)
           .assertSizeEqualTo(value);
+    }
     return this;
   }
 
   public WishesPage assertWishTitle(int index, String expected) {
-    getWishlistItem(index).assertTitleEqualsTo(expected);
+    getWishItem(index).assertTitleEqualsTo(expected);
     return this;
   }
 
   public WishesPage assertWishSubtitle(int index, String expected) {
-    getWishlistItem(index).assertSubtitleEqualsTo(expected);
+    getWishItem(index).assertSubtitleEqualsTo(expected);
     return this;
   }
 
   public WishesPage assertWishPrice(int index, String expected) {
-    getWishlistItem(index).assertPriceEqualsTo(expected);
+    getWishItem(index).assertPriceEqualsTo(expected);
     return this;
   }
 
   public void tapEditWish(int index) {
-    getWishlistItem(index).tapEdit();
+    getWishItem(index).tapEdit();
   }
 
   public void tapAddWish() {
@@ -52,7 +51,7 @@ public class WishesPage extends AbsBasePage {
         .click();
   }
 
-  private WishItem getWishlistItem(int index) {
+  private WishItem getWishItem(int index) {
     return (WishItem) wishesContent.get(index)
         .shouldBe(visible);
   }

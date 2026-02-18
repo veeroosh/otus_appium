@@ -2,28 +2,27 @@ package org.example.pages;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.appium.SelenideAppium.$;
+import static io.appium.java_client.AppiumBy.id;
 
 import com.codeborne.selenide.SelenideElement;
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import io.appium.java_client.AppiumBy;
-import org.example.components.WishlistItem;
-import org.example.components.WishlistsContent;
+import org.example.components.content.WishlistsContent;
+import org.example.components.items.WishlistItem;
 
 @Singleton
 public class MyWishlistsPage extends AbsBasePage {
 
-  @Inject
-  private WishlistsContent wishlistsContent;
-  private final SelenideElement addWishlistItemButton = $(AppiumBy.id("ru.otus.wishlist:id/add_button"));
+  private final WishlistsContent wishlistsContent = new WishlistsContent();
+  private final SelenideElement addWishlistItemButton = $(id("ru.otus.wishlist:id/add_button"));
 
   public MyWishlistsPage assertNumberOfWishlists(int value) {
-    if (value == 0)
+    if (value == 0) {
       wishlistsContent.shouldNotExist();
-    else
+    } else {
       wishlistsContent
           .shouldBe(visible)
           .assertSizeEqualTo(value);
+    }
     return this;
   }
 
@@ -48,9 +47,9 @@ public class MyWishlistsPage extends AbsBasePage {
   }
 
   private WishlistItem getWishlistItem(int index) {
-    WishlistItem item = (WishlistItem) wishlistsContent.get(index);
-    item.shouldBe(visible);
-    return item;
+    return (WishlistItem) wishlistsContent
+        .get(index)
+        .shouldBe(visible);
   }
 
   public void tapWishlist(int index) {

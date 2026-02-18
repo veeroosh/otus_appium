@@ -1,10 +1,7 @@
 import com.google.inject.Inject;
 import org.example.components.NavigationBar;
 import org.example.extensions.AndroidExtension;
-import org.example.pages.LoginPage;
-import org.example.pages.UsersPage;
-import org.example.pages.UsersWishesPage;
-import org.example.pages.UsersWishlistsPage;
+import org.example.pages.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -21,15 +18,18 @@ public class UserGiftReservationTest {
   private UsersWishlistsPage usersWishlistsPage;
   @Inject
   private UsersWishesPage usersWishesPage;
+  @Inject
+  private FilterPage filterPage;
 
   @Test
   void reserveUsersGift() {
     loginPage
-        .login("Nika", "0987654321");
+        .login("Nika4", "0987654321");
     navigationBar
         .tapUsersMenu();
+    filterPage
+        .searchForUser("Nika2");
     usersPage
-        .searchForUser("Nika2")
         .clickUser(1);
     usersWishlistsPage
         .tapWishlist(1);

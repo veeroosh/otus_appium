@@ -1,16 +1,15 @@
-package org.example.components;
+package org.example.components.content;
 
 import static com.codeborne.selenide.appium.SelenideAppium.$;
+import static io.appium.java_client.AppiumBy.id;
 
-import com.google.inject.Singleton;
-import io.appium.java_client.AppiumBy;
+import org.example.components.items.WishlistItem;
 
-@Singleton
 public class WishlistsContent extends AbsContentComponent<WishlistsContent> {
 
   public WishlistsContent() {
-    super($(AppiumBy.id("ru.otus.wishlist:id/wishlists")));
-    items = root.$$(AppiumBy.id("ru.otus.wishlist:id/wishlist_item"));
+    super($(id("ru.otus.wishlist:id/wishlists")));
+    items = root.$$(id("ru.otus.wishlist:id/wishlist_item"));
   }
 
   public WishlistItem get(int index) {

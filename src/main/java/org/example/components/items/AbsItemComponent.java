@@ -1,13 +1,14 @@
-package org.example.components;
+package org.example.components.items;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 
 import com.codeborne.selenide.SelenideElement;
+import org.example.components.AbsComponent;
 
-public class BaseItemComponent<T> extends AbsComponent<BaseItemComponent<T>> {
+public abstract class AbsItemComponent<T> extends AbsComponent<AbsItemComponent<T>> {
 
-  public BaseItemComponent(SelenideElement root) {
+  public AbsItemComponent(SelenideElement root) {
     super(root);
   }
 

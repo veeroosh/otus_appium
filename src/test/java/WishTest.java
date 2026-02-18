@@ -22,7 +22,7 @@ public class WishTest {
   @Test
   void createAndEditWish() {
     loginPage
-        .login("Nika", "0987654321");
+        .login("Nika3", "0987654321");
     String wishTitle = "Конфеты";
     String wishDescription = "Рот фронт";
     String wishPrice = "100";

@@ -2,6 +2,7 @@ package org.example.factory;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import com.google.inject.Singleton;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.remote.AutomationName;
 import org.openqa.selenium.Capabilities;
@@ -15,11 +16,12 @@ public class AndroidDriverModule extends AbstractModule {
   }
 
   @Provides
+  @Singleton
   private Capabilities capabilities() {
     UiAutomator2Options options = new UiAutomator2Options();
     options.setAutomationName(AutomationName.ANDROID_UIAUTOMATOR2);
     options.setPlatformName("Android");
-    options.setApp(System.getProperty("wiremock.url"));
+    options.setApp(String.format("%s%s", System.getProperty("wiremock.url"), "wishlist.apk"));
     options.fullReset();
     return options;
   }

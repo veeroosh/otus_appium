@@ -2,18 +2,17 @@ package org.example.pages;
 
 import static com.codeborne.selenide.Condition.visible;
 
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import org.example.components.WishlistsContent;
+import org.example.components.content.WishlistsContent;
 
 @Singleton
 public class UsersWishlistsPage extends AbsBasePage {
 
-  @Inject
-  private WishlistsContent wishlistsContent;
+  private final WishlistsContent wishlistsContent = new WishlistsContent();
 
   public void tapWishlist(int index) {
-    wishlistsContent.get(index)
+    wishlistsContent
+        .get(index)
         .shouldBe(visible)
         .click();
   }

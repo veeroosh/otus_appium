@@ -17,10 +17,12 @@
         <selenide.version>7.14.0</selenide.version>
         <guice.version>7.0.0</guice.version>
         <lombok.version>1.18.38</lombok.version>
+        <hikari.version>7.0.2</hikari.version>
+        <postgresql.version>42.7.10</postgresql.version>
 
         <maven.version>3.14.0</maven.version>
         <surefire.version>3.5.3</surefire.version>
-        <spotbugs.version>4.9.3.2</spotbugs.version>
+        <spotbugs.version>4.9.8.2</spotbugs.version>
         <checkstyle.version>3.6.0</checkstyle.version>
     </properties>
 
@@ -51,6 +53,18 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>${hikari.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -72,9 +86,10 @@
                 <configuration>
                     <systemPropertyVariables>
                         <appium.server.url>http://127.0.0.1</appium.server.url>
-                        <wiremock.url>http://wiremock:8080/wishlist.apk</wiremock.url>
-                        <emulator.port.one>4723</emulator.port.one>
-                        <emulator.port.two>4724</emulator.port.two>
+                        <wiremock.url>http://wiremock:8080/</wiremock.url>
+                        <jdbc.url>jdbc:postgresql://sql.otus.kartushin.su:5432/wishlist</jdbc.url>
+                        <db.username>student</db.username>
+                        <db.password>student</db.password>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

@@ -2,20 +2,20 @@ package org.example.pages;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.appium.SelenideAppium.$;
+import static io.appium.java_client.AppiumBy.id;
 
 import com.codeborne.selenide.SelenideElement;
 import com.google.inject.Singleton;
-import io.appium.java_client.AppiumBy;
 
 @Singleton
 public class EditWishPage extends AbsBasePage {
 
-  private final SelenideElement wishTitleInputField = $(AppiumBy.id("ru.otus.wishlist:id/name_input"));
+  private final SelenideElement wishTitleInputField = $(id("ru.otus.wishlist:id/name_input"));
   private final SelenideElement wishDescriptionInputField =
-      $(AppiumBy.id("ru.otus.wishlist:id/description_input"));
+      $(id("ru.otus.wishlist:id/description_input"));
   private final SelenideElement wishPriceInputField =
-      $(AppiumBy.id("ru.otus.wishlist:id/price_input"));
-  private final SelenideElement saveButton = $(AppiumBy.id("ru.otus.wishlist:id/save_button"));
+      $(id("ru.otus.wishlist:id/price_input"));
+  private final SelenideElement saveButton = $(id("ru.otus.wishlist:id/save_button"));
 
   public void tapSave() {
     saveButton

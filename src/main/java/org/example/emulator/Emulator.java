@@ -6,8 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum Emulator {
-  ANDROID_12(Integer.parseInt(System.getProperty("emulator.port.one"))),
-  ANDROID_14(Integer.parseInt(System.getProperty("emulator.port.two")));
+  ANDROID_12(4723),
+  ANDROID_14(4724);
 
   private final int port;
 }

@@ -7,7 +7,7 @@ import org.example.pageobject.AbsPageObject;
 
 @SuppressWarnings("unchecked")
 @AllArgsConstructor
-public class AbsComponent<T extends AbsComponent<T>> extends AbsPageObject {
+public abstract class AbsComponent<T extends AbsComponent<T>> extends AbsPageObject {
 
   protected final SelenideElement root;
 

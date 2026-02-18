@@ -2,18 +2,18 @@ package org.example.components;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.appium.SelenideAppium.$;
+import static io.appium.java_client.AppiumBy.id;
 
 import com.codeborne.selenide.SelenideElement;
 import com.google.inject.Singleton;
-import io.appium.java_client.AppiumBy;
 
 @Singleton
 public class NavigationBar extends AbsComponent<NavigationBar> {
 
-  private final SelenideElement usersTab = $(AppiumBy.id("ru.otus.wishlist:id/users_menu"));
+  private final SelenideElement usersTab = $(id("ru.otus.wishlist:id/users_menu"));
 
   public NavigationBar() {
-    super($(AppiumBy.id("ru.otus.wishlist:id/bottom_navigation")));
+    super($(id("ru.otus.wishlist:id/bottom_navigation")));
   }
 
   public void tapUsersMenu() {

@@ -1,10 +1,11 @@
-package org.example.components;
+package org.example.components.content;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import org.example.components.AbsComponent;
 
-public class AbsContentComponent<T> extends AbsComponent<AbsContentComponent<T>> {
+public abstract class AbsContentComponent<T> extends AbsComponent<AbsContentComponent<T>> {
 
   protected ElementsCollection items;
 
