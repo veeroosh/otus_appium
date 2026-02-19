@@ -88,8 +88,6 @@
                         <appium.server.url>http://127.0.0.1</appium.server.url>
                         <wiremock.url>http://wiremock:8080/</wiremock.url>
                         <jdbc.url>jdbc:postgresql://sql.otus.kartushin.su:5432/wishlist</jdbc.url>
-                        <db.username>student</db.username>
-                        <db.password>student</db.password>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

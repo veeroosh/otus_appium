@@ -20,7 +20,7 @@ public class LoginPage extends AbsBasePage {
       $(id("ru.otus.wishlist:id/log_in_button"))
           .as("Кнопка входа");
 
-  public void login(String username, String password) {
+  public LoginPage login(String username, String password) {
     usernameInputField
         .shouldBe(visible)
         .sendKeys(username);
@@ -30,5 +30,6 @@ public class LoginPage extends AbsBasePage {
     logInButton
         .shouldBe(visible)
         .click();
+    return this;
   }
 }

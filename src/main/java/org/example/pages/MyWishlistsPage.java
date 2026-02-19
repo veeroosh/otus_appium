@@ -47,7 +47,7 @@ public class MyWishlistsPage extends AbsBasePage {
   }
 
   private WishlistItem getWishlistItem(int index) {
-    return (WishlistItem) wishlistsContent
+    return wishlistsContent
         .get(index)
         .shouldBe(visible);
   }

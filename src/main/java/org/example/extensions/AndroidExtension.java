@@ -4,7 +4,6 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import org.example.db.module.DatabaseModule;
 import org.example.factory.AndroidDriverFactory;
 import org.example.factory.AndroidDriverModule;
 import org.junit.jupiter.api.extension.AfterEachCallback;
@@ -15,7 +14,7 @@ import org.openqa.selenium.WebDriver;
 
 public class AndroidExtension implements TestInstancePostProcessor, BeforeEachCallback, AfterEachCallback {
 
-  private final Injector injector = Guice.createInjector(new AndroidDriverModule(), new DatabaseModule());
+  private final Injector injector = Guice.createInjector(new AndroidDriverModule());
 
   @Override
   public void afterEach(ExtensionContext context) {

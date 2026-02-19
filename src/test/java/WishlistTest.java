@@ -1,8 +1,10 @@
 import com.google.inject.Inject;
+import org.example.db.DatabaseService;
 import org.example.extensions.AndroidExtension;
 import org.example.pages.EditWishlistPage;
 import org.example.pages.LoginPage;
 import org.example.pages.MyWishlistsPage;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -15,6 +17,16 @@ public class WishlistTest {
   private EditWishlistPage editWishlistPage;
   @Inject
   private MyWishlistsPage myWishlistsPage;
+  @Inject
+  private DatabaseService dbService;
+
+  @BeforeEach
+  void resetData() {
+    String userId = dbService.getUserIdByName("Nika");
+    String wishlistId = dbService.getWishlistIdByUserId(userId);
+    dbService.deleteGiftsByWishlistId(wishlistId);
+    dbService.deleteWishlistsByUserId(userId);
+  }
 
   @Test
   void createAndEditWishlist() {

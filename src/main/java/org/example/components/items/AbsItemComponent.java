@@ -4,9 +4,11 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebElementCondition;
 import org.example.components.AbsComponent;
 
-public abstract class AbsItemComponent<T> extends AbsComponent<AbsItemComponent<T>> {
+@SuppressWarnings("unchecked")
+public abstract class AbsItemComponent<T extends AbsItemComponent<T>> extends AbsComponent<AbsItemComponent<T>> {
 
   public AbsItemComponent(SelenideElement root) {
     super(root);
@@ -38,5 +40,10 @@ public abstract class AbsItemComponent<T> extends AbsComponent<AbsItemComponent<
     title
         .shouldBe(visible)
         .click();
+  }
+
+  public T shouldBe(WebElementCondition... condition) {
+    root.shouldBe(condition);
+    return (T) this;
   }
 }

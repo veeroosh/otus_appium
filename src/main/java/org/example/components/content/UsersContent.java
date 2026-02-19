@@ -5,7 +5,7 @@ import static io.appium.java_client.AppiumBy.id;
 
 import org.example.components.items.UserItem;
 
-public class UsersContent extends AbsContentComponent<UsersContent> {
+public class UsersContent extends AbsContentComponent {
 
   public UsersContent() {
     super($(id("ru.otus.wishlist:id/users")));

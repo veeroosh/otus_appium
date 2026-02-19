@@ -52,7 +52,7 @@ public class WishesPage extends AbsBasePage {
   }
 
   private WishItem getWishItem(int index) {
-    return (WishItem) wishesContent.get(index)
+    return wishesContent.get(index)
         .shouldBe(visible);
   }
 }

@@ -5,7 +5,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.example.components.AbsComponent;
 
-public abstract class AbsContentComponent<T> extends AbsComponent<AbsContentComponent<T>> {
+public abstract class AbsContentComponent extends AbsComponent<AbsContentComponent> {
 
   protected ElementsCollection items;
 

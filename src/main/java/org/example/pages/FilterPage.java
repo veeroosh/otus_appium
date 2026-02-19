@@ -10,15 +10,11 @@ import com.google.inject.Singleton;
 @Singleton
 public class FilterPage extends AbsBasePage {
 
-  private final SelenideElement filter = $(id("ru.otus.wishlist:id/filter"));
   private final SelenideElement usernameFilterInput =
       $(id("ru.otus.wishlist:id/username_input"));
   private final SelenideElement searchButton = $(id("ru.otus.wishlist:id/apply_button"));
 
   public void searchForUser(String username) {
-    filter
-        .shouldBe(visible)
-        .click();
     usernameFilterInput
         .shouldBe(visible)
         .sendKeys(username);
