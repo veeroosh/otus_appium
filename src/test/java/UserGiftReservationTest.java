@@ -2,10 +2,10 @@ import com.google.inject.Inject;
 import org.example.db.DatabaseService;
 import org.example.extensions.AndroidExtension;
 import org.example.pages.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+@SuppressWarnings("unused")
 @ExtendWith(AndroidExtension.class)
 public class UserGiftReservationTest {
 
@@ -22,16 +22,9 @@ public class UserGiftReservationTest {
   @Inject
   private DatabaseService dbService;
 
-  @BeforeEach
-  void resetData() {
-    String userId = dbService.getUserIdByName("Nika2");
-    String wishlistId = dbService.getWishlistIdByUserId(userId);
-    String giftId = dbService.getGiftIdByWishlistId(wishlistId);
-    dbService.resetGiftReservation(giftId);
-  }
-
   @Test
   void reserveUsersGift() {
+    dbService.resetGiftReservation("Nika2");
     loginPage
         .login("Nika4", "0987654321")
         .tapUsersMenu()

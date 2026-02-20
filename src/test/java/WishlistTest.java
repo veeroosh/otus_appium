@@ -4,10 +4,10 @@ import org.example.extensions.AndroidExtension;
 import org.example.pages.EditWishlistPage;
 import org.example.pages.LoginPage;
 import org.example.pages.MyWishlistsPage;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+@SuppressWarnings("unused")
 @ExtendWith(AndroidExtension.class)
 public class WishlistTest {
 
@@ -20,16 +20,9 @@ public class WishlistTest {
   @Inject
   private DatabaseService dbService;
 
-  @BeforeEach
-  void resetData() {
-    String userId = dbService.getUserIdByName("Nika");
-    String wishlistId = dbService.getWishlistIdByUserId(userId);
-    dbService.deleteGiftsByWishlistId(wishlistId);
-    dbService.deleteWishlistsByUserId(userId);
-  }
-
   @Test
   void createAndEditWishlist() {
+    dbService.deleteWishlistsForUser("Nika");
     loginPage
         .login("Nika", "0987654321");
     String wishlistTitle = "День рождения";

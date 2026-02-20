@@ -5,10 +5,10 @@ import org.example.pages.EditWishPage;
 import org.example.pages.LoginPage;
 import org.example.pages.MyWishlistsPage;
 import org.example.pages.WishesPage;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+@SuppressWarnings("unused")
 @ExtendWith(AndroidExtension.class)
 public class WishTest {
 
@@ -23,15 +23,9 @@ public class WishTest {
   @Inject
   private DatabaseService dbService;
 
-  @BeforeEach
-  void resetData() {
-    String userId = dbService.getUserIdByName("Nika3");
-    String wishlistId = dbService.getWishlistIdByUserId(userId);
-    dbService.deleteGiftsByWishlistId(wishlistId);
-  }
-
   @Test
   void createAndEditWish() {
+    dbService.deleteGiftsForUser("Nika3");
     loginPage
         .login("Nika3", "0987654321");
     String wishTitle = "Конфеты";

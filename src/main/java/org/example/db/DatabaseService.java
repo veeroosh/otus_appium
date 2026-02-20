@@ -17,51 +17,36 @@ public class DatabaseService {
     return DriverManager.getConnection(url, username, password);
   }
 
-  private void executeUpdate(String sql) {
+  public void resetGiftReservation(String username) {
+    String sql = "UPDATE gifts SET is_reserved = 'f' WHERE wish_id IN (SELECT id FROM wishlists WHERE user_id IN (SELECT id FROM users WHERE username = ?))";
     try (Connection conn = getConnection();
          PreparedStatement ps = conn.prepareStatement(sql)) {
+      ps.setString(1, username);
       ps.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
     }
   }
 
-  public void resetGiftReservation(String giftId) {
-    executeUpdate(String.format("UPDATE gifts SET is_reserved = 'f' WHERE id = '%s'", giftId));
-  }
-
-  public void deleteGiftsByWishlistId(String wishlistId) {
-    executeUpdate(String.format("DELETE FROM gifts WHERE wish_id = '%s'", wishlistId));
-  }
-
-  public void deleteWishlistsByUserId(String userId) {
-    executeUpdate(String.format("DELETE FROM wishlists WHERE user_id = '%s'", userId));
-  }
-
-  private String executeQuery(String sql) {
+  public void deleteWishlistsForUser(String username) {
+    String sql = "DELETE FROM wishlists WHERE user_id IN (SELECT id FROM users WHERE username = ?)";
     try (Connection conn = getConnection();
          PreparedStatement ps = conn.prepareStatement(sql)) {
-      try (ResultSet rs = ps.executeQuery()) {
-        if (rs.next()) {
-          return rs.getString("id");
-        }
-      }
+      ps.setString(1, username);
+      ps.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
     }
-
-    return null;
   }
 
-  public String getUserIdByName(String name) {
-    return executeQuery(String.format("SELECT id FROM users WHERE username = '%s'", name));
-  }
-
-  public String getWishlistIdByUserId(String userId) {
-    return executeQuery(String.format("SELECT id FROM wishlists WHERE user_id = '%s'", userId));
-  }
-
-  public String getGiftIdByWishlistId(String wishlistId) {
-    return executeQuery(String.format("SELECT id FROM gifts WHERE wish_id = '%s'", wishlistId));
+  public void deleteGiftsForUser(String username) {
+    String sql = "DELETE FROM gifts WHERE wish_id IN (SELECT id FROM wishlists WHERE user_id IN (SELECT id FROM users WHERE username = ?))";
+    try (Connection conn = getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+      ps.setString(1, username);
+      ps.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 }
