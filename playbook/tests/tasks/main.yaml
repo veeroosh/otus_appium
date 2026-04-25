@@ -1,0 +1,26 @@
+---
+- name: Build and push docker image
+  community.docker.docker_image:
+    name: "mobile_tests"
+    tag: "latest"
+    repository: "localhost:5005/mobile_tests"
+    source: build
+    build:
+      path: "/root/jenkins/workspace/mobile_tests/"
+      dockerfile: Dockerfile.mobile_tests
+    push: yes
+
+- name: Running mobile tests
+  community.docker.docker_container:
+    name: mobile_tests
+    image: "localhost:5005/mobile_tests:latest"
+    pull: true
+    detach: false
+    auto_remove: false
+    network_mode: host
+    env:
+      APPIUM_SERVER_URL: "{{ appium_server_url }}"
+      WIREMOCK_URL: "{{ wiremock_url }}"
+      JDBC_URL: "{{ jdbc_url }}"
+    output_logs: true
+  register: container_result

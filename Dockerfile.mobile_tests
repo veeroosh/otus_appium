@@ -2,6 +2,9 @@ FROM maven:3.9.4-eclipse-temurin-21
 
 RUN apt-get update -y && apt-get install -y unzip curl
 
+ENV APPIUM_SERVER_URL=http://127.0.0.1/appium
+ENV WIREMOCK_URL=http://127.0.0.1/wiremock-appium
+ENV JDBC_URL=jdbc:postgresql://sql.otus.kartushin.su:5432/wishlist
 ENV ALLURE_VERSION=2.34.1
 
 WORKDIR /tests
@@ -17,6 +20,10 @@ RUN curl -L -o /tmp/allure.zip https://github.com/allure-framework/allure2/relea
 RUN mkdir -p /tests/allure-results /tests/allure-report
 
 CMD mvn clean test \
-      -Dsurefire.ignoreFailures=true \
-      -Dallure.results.directory=/tests/allure-results \
+    -DappiumServerUrl=${APPIUM_SERVER_URL} \
+    -DwiremockUrl=${WIREMOCK_URL} \
+    -DjdbcUrl=${JDBC_URL} \
+    -DdatabaseUsername=student \
+    -DdatabasePassword=student \
+    -Dallure.results.directory=/tests/allure-results \
     && allure generate /tests/allure-results -o /tests/allure-report --clean
